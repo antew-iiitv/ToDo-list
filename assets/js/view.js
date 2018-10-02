@@ -1,9 +1,11 @@
-let todos = []
+$(() => {
+    renderTodos()
+})
 
 $("ul").on("click", "li", function(){
     // Get ident and toggle complete
     const ident = $(this).attr('identifier')
-    toggleTodoComplete(todos, ident)
+    toggleTodoComplete(ident)
 
     // Update view
     $(this).toggleClass("completed");
@@ -12,7 +14,7 @@ $("ul").on("click", "li", function(){
 $("ul").on("click", "span", function(){
     // Get ident and remove todo
     const ident = $(this).parent().attr('identifier')
-    removeTodo(todos, ident)
+    removeTodo(ident)
 
     // Animate fadeout
     $(this).parent().fadeOut(500, function(){
@@ -29,8 +31,8 @@ $("input[type = 'text']").keypress(function(event){
         let label = $(this).val();
 
         // Create todo
-        createTodo(todos, label, false)
-        view(todos)
+        createTodo(label, false)
+        renderTodos()
 
         // Reset text field
         $(this).val('')
